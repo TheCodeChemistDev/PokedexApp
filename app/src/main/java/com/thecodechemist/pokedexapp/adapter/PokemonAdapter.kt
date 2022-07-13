@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.thecodechemist.pokedexapp.R
+import com.thecodechemist.pokedexapp.databinding.ListItemBinding
 import com.thecodechemist.pokedexapp.db.Pokemon
 
 class PokemonAdapter : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(PokemonComparator()) {
@@ -21,18 +22,18 @@ class PokemonAdapter : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(Po
         holder.bind(currentPokemon.name)
     }
 
-    class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvPokemonName: TextView = itemView.findViewById(R.id.name)
+    class PokemonViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pokemonName: String) {
-            tvPokemonName.text = pokemonName
+            binding.name.text = pokemonName
         }
 
         companion object {
             fun create(parent: ViewGroup): PokemonViewHolder {
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_item, parent, false)
-                return PokemonViewHolder(view)
+                val binding: ListItemBinding = ListItemBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false)
+                //val view: View = binding.root
+                return PokemonViewHolder(binding)
             }
         }
     }
