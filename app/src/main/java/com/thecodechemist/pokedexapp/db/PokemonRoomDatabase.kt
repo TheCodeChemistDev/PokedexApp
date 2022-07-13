@@ -36,19 +36,25 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
             //Delete the current data from the database
             pokemonDao.deleteAll()
 
+            //TODO: Add an InsertAll method to add all Pokemon pulled from API
+            val pokemonList: MutableList<Pokemon> = mutableListOf<Pokemon>()
             for(i in 1..20) {
                 try {
-                    val apiResponse = PokemonApi.retrofitService.getPokemonById(i.toString())
-                    val jsonResultsObject = JSONTokener(apiResponse).nextValue() as JSONObject
-                    val pokemonName = jsonResultsObject.getString("name")
-                    val pokemonSpriteUrlsObject = jsonResultsObject.getJSONObject("sprites")
-                    val pokemonSpriteUrl = pokemonSpriteUrlsObject.getString("front_default")
-                    val newPokemon = Pokemon(i as Integer, pokemonName, pokemonSpriteUrl)
-                    pokemonDao.insert(newPokemon)
+                    Log.i("Getting Pokemon ID", i.toString())
+                    var apiResponse = PokemonApi.retrofitService.getPokemonById(i.toString())
+                    var jsonResultsObject = JSONTokener(apiResponse).nextValue() as JSONObject
+                    var pokemonName = jsonResultsObject.getString("name")
+                    var pokemonSpriteUrlsObject = jsonResultsObject.getJSONObject("sprites")
+                    var pokemonSpriteUrl = pokemonSpriteUrlsObject.getString("front_default")
+                    var newPokemon = Pokemon(i as Integer, pokemonName, pokemonSpriteUrl)
+                    pokemonList.add(newPokemon)
+//                    Log.i("New Pokemon", newPokemon.toString())
+//                    pokemonDao.insert(newPokemon)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
+            pokemonDao.insertAll(pokemonList)
         }
 
     }
@@ -65,7 +71,6 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
             context: Context,
             scope: CoroutineScope
         ): PokemonRoomDatabase {
-            Log.i("Database", "Getting Database")
             //Create the database if it does not already exist
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
