@@ -8,5 +8,7 @@ import androidx.room.PrimaryKey
 data class Pokemon (
     @PrimaryKey @ColumnInfo(name = "id") val id: Integer,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "spriteUrl") val spriteUrl: String)
-    //TODO: Add further columns for other Pokemon stats
+    @ColumnInfo(name = "spriteUrl") val spriteUrl: String,
+    @ColumnInfo(name = "height") val height: Integer,
+    @ColumnInfo(name = "weight") val weight: Integer
+    )

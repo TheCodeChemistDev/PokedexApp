@@ -43,10 +43,18 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
                     Log.i("Getting Pokemon ID", i.toString())
                     var apiResponse = PokemonApi.retrofitService.getPokemonById(i.toString())
                     var jsonResultsObject = JSONTokener(apiResponse).nextValue() as JSONObject
+                    //TODO: Capitalise first letter of the Pokemon Name
                     var pokemonName = jsonResultsObject.getString("name")
                     var pokemonSpriteUrlsObject = jsonResultsObject.getJSONObject("sprites")
                     var pokemonSpriteUrl = pokemonSpriteUrlsObject.getString("front_default")
-                    var newPokemon = Pokemon(i as Integer, pokemonName, pokemonSpriteUrl)
+                    var pokemonHeight = jsonResultsObject.getInt("height")
+                    var pokemonWeight = jsonResultsObject.getInt("weight")
+                    var newPokemon = Pokemon(
+                        i as Integer,
+                        pokemonName,
+                        pokemonSpriteUrl,
+                        pokemonHeight as Integer,
+                        pokemonWeight as Integer)
                     pokemonList.add(newPokemon)
                 } catch (e: Exception) {
                     e.printStackTrace()

@@ -44,8 +44,12 @@ class PokemonDetailFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //Display the Pokemon details
-        binding.name.text = viewModel.selectedPokemon.name
         Glide.with(binding.root).load(viewModel.selectedPokemon.spriteUrl).into(binding.sprite)
+        binding.pokemonId.text = "#${viewModel.selectedPokemon.id}"
+        binding.name.text = "Name: ${viewModel.selectedPokemon.name}"
+        binding.height.text = "Height: ${viewModel.selectedPokemon.height}cm"
+        binding.weight.text = "Weight: ${viewModel.selectedPokemon.weight}kg"
+
     }
 
 
