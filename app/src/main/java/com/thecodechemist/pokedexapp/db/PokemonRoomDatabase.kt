@@ -36,7 +36,7 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
             //Delete the current data from the database
             pokemonDao.deleteAll()
 
-            //TODO: Add an InsertAll method to add all Pokemon pulled from API
+            //TODO: Update to iterate through all Pokemon
             val pokemonList: MutableList<Pokemon> = mutableListOf<Pokemon>()
             for(i in 1..20) {
                 try {
@@ -48,8 +48,6 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
                     var pokemonSpriteUrl = pokemonSpriteUrlsObject.getString("front_default")
                     var newPokemon = Pokemon(i as Integer, pokemonName, pokemonSpriteUrl)
                     pokemonList.add(newPokemon)
-//                    Log.i("New Pokemon", newPokemon.toString())
-//                    pokemonDao.insert(newPokemon)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -58,8 +56,6 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
         }
 
     }
-
-
 
     //Singleton Database to prevent multiple instances
     companion object {

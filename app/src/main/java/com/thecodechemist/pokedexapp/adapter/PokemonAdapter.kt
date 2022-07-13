@@ -1,15 +1,14 @@
 package com.thecodechemist.pokedexapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.thecodechemist.pokedexapp.R
 import com.thecodechemist.pokedexapp.databinding.ListItemBinding
 import com.thecodechemist.pokedexapp.db.Pokemon
+import com.bumptech.glide.Glide
 
 class PokemonAdapter : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(PokemonComparator()) {
 
@@ -19,20 +18,22 @@ class PokemonAdapter : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(Po
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val currentPokemon = getItem(position)
-        holder.bind(currentPokemon.name)
+        holder.bind(currentPokemon.name, currentPokemon.spriteUrl)
+
     }
 
     class PokemonViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(pokemonName: String) {
+        fun bind(pokemonName: String, pokemonSpriteUrl: String) {
             binding.name.text = pokemonName
+            val ivSprite: ImageView = binding.sprite
+            Glide.with(binding.root).load(pokemonSpriteUrl).into(ivSprite)
         }
 
         companion object {
             fun create(parent: ViewGroup): PokemonViewHolder {
                 val binding: ListItemBinding = ListItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false)
-                //val view: View = binding.root
                 return PokemonViewHolder(binding)
             }
         }
