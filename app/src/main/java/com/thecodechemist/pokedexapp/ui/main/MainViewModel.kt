@@ -8,9 +8,14 @@ import kotlinx.coroutines.launch
 public class MainViewModel(private val repository: PokemonRepository) : ViewModel() {
 
     val allPokemon: LiveData<List<Pokemon>> = repository.allPokemon.asLiveData()
+    lateinit var selectedPokemon: Pokemon
 
     fun insert(pokemon: Pokemon) = viewModelScope.launch {
         repository.insert(pokemon)
+    }
+
+    fun selectPokemon(pokemon: Pokemon) {
+        selectedPokemon = pokemon
     }
 }
 

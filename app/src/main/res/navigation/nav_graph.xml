@@ -18,5 +18,7 @@
         android:id="@+id/pokemonDetailFragment"
         android:name="com.thecodechemist.pokedexapp.ui.main.PokemonDetailFragment"
         android:label="fragment_pokemon_detail"
-        tools:layout="@layout/fragment_pokemon_detail" />
+        tools:layout="@layout/fragment_pokemon_detail">
+        <argument android:name="pokemonId" />
+    </fragment>
 </navigation>
