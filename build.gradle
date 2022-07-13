@@ -10,11 +10,13 @@ buildscript {
 
     }
     dependencies {
+
         classpath "com.android.tools.build:gradle:7.0.4"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // Navigation Safe args
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.0")
+
     }
 }
 
@@ -28,6 +30,7 @@ ext {
     materialVersion = '1.6.1'
     roomVersion = '2.4.2'
     fragmentVersion = '1.5.0'
+    navVersion = '2.5.0'
     // testing
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'

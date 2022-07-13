@@ -3,12 +3,15 @@ package com.thecodechemist.pokedexapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.thecodechemist.pokedexapp.databinding.ListItemBinding
 import com.thecodechemist.pokedexapp.db.Pokemon
 import com.bumptech.glide.Glide
+import com.thecodechemist.pokedexapp.ui.main.MainFragmentDirections
 
 class PokemonAdapter : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(PokemonComparator()) {
 
@@ -28,6 +31,9 @@ class PokemonAdapter : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(Po
             binding.name.text = pokemonName
             val ivSprite: ImageView = binding.sprite
             Glide.with(binding.root).load(pokemonSpriteUrl).into(ivSprite)
+            binding.getDetails.setOnClickListener {
+                Navigation.findNavController(it).navigate(MainFragmentDirections.actionMainFragmentToPokemonDetailFragment())
+            }
         }
 
         companion object {
