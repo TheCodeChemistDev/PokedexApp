@@ -27,10 +27,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs += [
@@ -49,7 +51,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
 
     // Dependencies for working with Architecture components
-
     // Room components
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
@@ -76,4 +77,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
+
+    //Network Dependencies
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    // Retrofit with Moshi Converter
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
 }
