@@ -15,8 +15,11 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon_table WHERE id = :id LIMIT 1")
     fun getPokemonById(id: Integer): Flow<Pokemon>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(pokemon: Pokemon)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(pokemon: List<Pokemon>)
 
     @Query("DELETE FROM pokemon_table")
     suspend fun deleteAll()
