@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.thecodechemist.pokedexapp.PokemonApplication
 import com.thecodechemist.pokedexapp.R
 import com.thecodechemist.pokedexapp.adapter.PokemonAdapter
 import com.thecodechemist.pokedexapp.databinding.MainFragmentBinding
+import com.thecodechemist.pokedexapp.db.PokemonRepository
 
 class MainFragment : Fragment() {
 
@@ -19,7 +22,9 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory((requireActivity().application as PokemonApplication).repository)
+    }
     private var _binding: MainFragmentBinding? = null
     private val binding get() =_binding!!
 
@@ -39,6 +44,10 @@ class MainFragment : Fragment() {
         val adapter = PokemonAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+        viewModel.allPokemon
+        viewModel.allPokemon.observe(viewLifecycleOwner, { pokemon ->
+            pokemon?.let { adapter.submitList(it)}
+        })
     }
 
     override fun onDestroyView() {
@@ -48,8 +57,8 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+
     }
 
 }
