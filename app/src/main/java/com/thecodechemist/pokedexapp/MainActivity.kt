@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.thecodechemist.pokedexapp.databinding.MainActivityBinding
-import com.thecodechemist.pokedexapp.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

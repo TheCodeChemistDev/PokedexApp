@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.thecodechemist.pokedexapp.PokemonApplication
-import com.thecodechemist.pokedexapp.R
 import com.thecodechemist.pokedexapp.databinding.FragmentPokemonDetailBinding
 
 
@@ -21,16 +20,10 @@ class PokemonDetailFragment : Fragment() {
         MainViewModelFactory((requireActivity().application as PokemonApplication).repository)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPokemonDetailBinding.inflate(inflater, container, false)
 

@@ -8,10 +8,10 @@ import kotlinx.coroutines.SupervisorJob
 
 class PokemonApplication : Application() {
 
-    val applicationScope = CoroutineScope(SupervisorJob())
+    private val applicationScope = CoroutineScope(SupervisorJob())
 
 
     //database and repository are only created when they are required, rather than when the app starts
-    val database by lazy { PokemonRoomDatabase.getDatabase(this, applicationScope) }
+    private val database by lazy { PokemonRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { PokemonRepository(database.pokemonDao())}
 }

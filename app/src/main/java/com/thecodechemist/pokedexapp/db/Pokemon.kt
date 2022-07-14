@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "pokemon_table")
 data class Pokemon (
-    @PrimaryKey @ColumnInfo(name = "id") val id: Integer,
+    @PrimaryKey @ColumnInfo(name = "id") val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "spriteUrl") val spriteUrl: String,
-    @ColumnInfo(name = "height") val height: Integer,
-    @ColumnInfo(name = "weight") val weight: Integer
+    @ColumnInfo(name = "height") val height: Int,
+    @ColumnInfo(name = "weight") val weight: Int
     )

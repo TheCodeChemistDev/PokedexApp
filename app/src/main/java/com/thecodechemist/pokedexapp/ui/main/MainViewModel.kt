@@ -5,7 +5,7 @@ import com.thecodechemist.pokedexapp.db.Pokemon
 import com.thecodechemist.pokedexapp.db.PokemonRepository
 import kotlinx.coroutines.launch
 
-public class MainViewModel(private val repository: PokemonRepository) : ViewModel() {
+class MainViewModel(private val repository: PokemonRepository) : ViewModel() {
 
     val allPokemon: LiveData<List<Pokemon>> = repository.allPokemon.asLiveData()
     lateinit var selectedPokemon: Pokemon

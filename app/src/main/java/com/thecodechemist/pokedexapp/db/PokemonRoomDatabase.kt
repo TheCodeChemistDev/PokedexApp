@@ -7,15 +7,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.thecodechemist.pokedexapp.network.PokemonApi
-import com.thecodechemist.pokedexapp.network.PokemonApiService
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import org.json.JSONTokener
 
-@Database(entities = arrayOf(Pokemon::class), version = 1, exportSchema = false)
-public abstract class PokemonRoomDatabase : RoomDatabase() {
+@Database(entities = [Pokemon::class], version = 1, exportSchema = false)
+abstract class PokemonRoomDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
 
@@ -37,7 +35,7 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
             pokemonDao.deleteAll()
 
             //TODO: Update to include Pokemon from all generations
-            val pokemonList: MutableList<Pokemon> = mutableListOf<Pokemon>()
+            val pokemonList = mutableListOf<Pokemon>()
             for(i in 1..151) {
                 try {
                     Log.i("Getting Pokemon ID", i.toString())
@@ -50,11 +48,11 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
                     val pokemonHeight = jsonResultsObject.getInt("height")
                     val pokemonWeight = jsonResultsObject.getInt("weight")
                     val newPokemon = Pokemon(
-                        i as Integer,
+                        i,
                         pokemonName,
                         pokemonSpriteUrl,
-                        pokemonHeight as Integer,
-                        pokemonWeight as Integer)
+                        pokemonHeight,
+                        pokemonWeight)
                     pokemonList.add(newPokemon)
                 } catch (e: Exception) {
                     e.printStackTrace()

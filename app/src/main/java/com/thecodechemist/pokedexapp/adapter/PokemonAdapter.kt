@@ -3,7 +3,6 @@ package com.thecodechemist.pokedexapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.thecodechemist.pokedexapp.ui.main.MainFragmentDirections
 import com.thecodechemist.pokedexapp.ui.main.MainViewModel
 
-class PokemonAdapter(private val viewModel: MainViewModel) : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(PokemonComparator(), ) {
+class PokemonAdapter(private val viewModel: MainViewModel) : ListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(PokemonComparator() ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         return PokemonViewHolder.create(parent, viewModel)
@@ -26,7 +25,7 @@ class PokemonAdapter(private val viewModel: MainViewModel) : ListAdapter<Pokemon
 
     }
 
-    class PokemonViewHolder(val binding: ListItemBinding, val viewModel: MainViewModel) : RecyclerView.ViewHolder(binding.root) {
+    class PokemonViewHolder(private val binding: ListItemBinding, private val viewModel: MainViewModel) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pokemon: Pokemon) {
             binding.name.text = pokemon.name

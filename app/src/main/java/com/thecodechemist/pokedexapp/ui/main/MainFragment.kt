@@ -1,7 +1,5 @@
 package com.thecodechemist.pokedexapp.ui.main
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,18 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.thecodechemist.pokedexapp.PokemonApplication
-import com.thecodechemist.pokedexapp.R
 import com.thecodechemist.pokedexapp.adapter.PokemonAdapter
 import com.thecodechemist.pokedexapp.databinding.MainFragmentBinding
-import com.thecodechemist.pokedexapp.db.PokemonRepository
 
 class MainFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private val viewModel: MainViewModel by activityViewModels {
         MainViewModelFactory((requireActivity().application as PokemonApplication).repository)
@@ -58,12 +49,6 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
     }
 
 }
