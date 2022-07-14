@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thecodechemist.pokedexapp.PokemonApplication
@@ -44,7 +45,7 @@ class MainFragment : Fragment() {
         val adapter = PokemonAdapter(viewModel)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        viewModel.allPokemon
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
         viewModel.allPokemon.observe(viewLifecycleOwner, { pokemon ->
             pokemon?.let { adapter.submitList(it)}
         })

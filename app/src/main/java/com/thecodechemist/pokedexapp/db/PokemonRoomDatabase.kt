@@ -36,20 +36,20 @@ public abstract class PokemonRoomDatabase : RoomDatabase() {
             //Delete the current data from the database
             pokemonDao.deleteAll()
 
-            //TODO: Update to iterate through all Pokemon
+            //TODO: Update to include Pokemon from all generations
             val pokemonList: MutableList<Pokemon> = mutableListOf<Pokemon>()
-            for(i in 1..20) {
+            for(i in 1..151) {
                 try {
                     Log.i("Getting Pokemon ID", i.toString())
-                    var apiResponse = PokemonApi.retrofitService.getPokemonById(i.toString())
-                    var jsonResultsObject = JSONTokener(apiResponse).nextValue() as JSONObject
+                    val apiResponse = PokemonApi.retrofitService.getPokemonById(i.toString())
+                    val jsonResultsObject = JSONTokener(apiResponse).nextValue() as JSONObject
                     //TODO: Capitalise first letter of the Pokemon Name
-                    var pokemonName = jsonResultsObject.getString("name")
-                    var pokemonSpriteUrlsObject = jsonResultsObject.getJSONObject("sprites")
-                    var pokemonSpriteUrl = pokemonSpriteUrlsObject.getString("front_default")
-                    var pokemonHeight = jsonResultsObject.getInt("height")
-                    var pokemonWeight = jsonResultsObject.getInt("weight")
-                    var newPokemon = Pokemon(
+                    val pokemonName = jsonResultsObject.getString("name").replaceFirstChar { it.uppercase() }
+                    val pokemonSpriteUrlsObject = jsonResultsObject.getJSONObject("sprites")
+                    val pokemonSpriteUrl = pokemonSpriteUrlsObject.getString("front_default")
+                    val pokemonHeight = jsonResultsObject.getInt("height")
+                    val pokemonWeight = jsonResultsObject.getInt("weight")
+                    val newPokemon = Pokemon(
                         i as Integer,
                         pokemonName,
                         pokemonSpriteUrl,
